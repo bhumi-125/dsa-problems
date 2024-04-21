@@ -1,0 +1,23 @@
+
+class Solution {
+public:
+    TreeNode* add(TreeNode* root, int val, int depth , int curr){
+        if(!root){
+            return NULL;
+        }
+        if(curr == depth-1){
+            TreeNode* leftt= root->left;
+            TreeNode* rightt= root->right;
+
+            root->left = new TreeNode(val);
+            root->right = new TreeNode(val);
+
+            root->left->left= leftt;
+            root->right->right = rightt;
+            return root;
+        }
+
+        add(root->left , val , depth , curr+1);
+        add(root->right , val , depth , curr+1);
+        return root;
+    }
