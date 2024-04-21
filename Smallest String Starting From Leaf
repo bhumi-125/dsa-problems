@@ -1,0 +1,24 @@
+problem link : https://leetcode.com/problems/smallest-string-starting-from-leaf/description/?envType=daily-question&envId=2024-04-21
+
+class Solution {
+public:
+    string result="";
+    void dfs( TreeNode* root, string curr){
+        if(!root)   return ;
+
+        curr = char(root->val + 'a') + curr;
+
+        if(!root->left && !root->right){
+            if(result == "" || result >curr){
+                result= curr;
+            }
+            return ;
+        }
+        dfs(root->left , curr);
+        dfs(root->right , curr);
+    }
+    string smallestFromLeaf(TreeNode* root) {
+        dfs(root , "");
+        return result;
+    }
+};
